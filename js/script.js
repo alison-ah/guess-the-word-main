@@ -27,3 +27,17 @@ guessButton.addEventListener("click", function (e) {
     console.log(letter);
     playerGuess.value = "";
   });
+
+const validateInput = function (input) {
+    const acceptedLetter = /[a-zA-Z]/;
+    if (input.length === 0) {
+        messages.innerText = "Please type a letter.";
+    } else if (input.length > 1) {
+        messages.innerText = "Please enter 1 letter at a time.";
+    } else if (!input.match(acceptedLetter)) {
+        messages.innerText = "Please enter a letter.";
+    } else {
+        return input;
+    }
+  };
+
