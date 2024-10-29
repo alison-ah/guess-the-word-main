@@ -12,13 +12,18 @@ const word = "magnolia";
 // Display symbols as placeholder for the word's letters
 const placeholder = function (word) {
     const placeholderLetters = [];
-    for (const letter of word {
+    for (const letter of word) {
         console.log(letter);
         placeholderLetters.push("●");
     }
     progress.innerText = placeholderLetters.join("");
 };
 
-placeholder(word)
+placeholder(word);
 
-// Event listener for button
+guessButton.addEventListener("click", function (e) {
+    e.preventDefault();
+    const letter = playerGuess.value;
+    console.log(letter);
+    playerGuess.value = "";
+  });
