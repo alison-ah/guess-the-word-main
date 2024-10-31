@@ -6,9 +6,9 @@ const remainingGuessesElement = document.querySelector(".remaining");
 const remainingGuessesSpan = document.querySelector(".remaining span");
 const messages = document.querySelector(".message")
 const playAgainButton = document.querySelector(".play-again");
-const remainingGuesses = 8;
+let remainingGuesses = 8;
 
-const word = "magnolia";
+let word = "magnolia";
 const guessedLettersList = [];
 
 // Display symbols as placeholder for the word's letters
