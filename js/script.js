@@ -6,10 +6,22 @@ const remainingGuessesElement = document.querySelector(".remaining");
 const remainingGuessesSpan = document.querySelector(".remaining span");
 const messages = document.querySelector(".message")
 const playAgainButton = document.querySelector(".play-again");
-let remainingGuesses = 8;
 
 let word = "magnolia";
 const guessedLettersList = [];
+let remainingGuesses = 8;
+
+const getWord = async function () {
+  const request = await fetch("https://gist.githubusercontent.com/skillcrush-curriculum/7061f1d4d3d5bfe47efbfbcfe42bf57e/raw/5ffc447694486e7dea686f34a6c085ae371b43fe/words.txt");
+  const words = await request.text();
+  const wordArray = words.split("\n");
+  const randomIndex = Math.floor(Math.random() * wordArray.length);
+  word = wordArray[randomIndex].trim();
+  placeholder(word);
+}; 
+
+// Fire off the game
+getWord();
 
 // Display symbols as placeholder for the word's letters
 const placeholder = function (word) {
@@ -20,8 +32,6 @@ const placeholder = function (word) {
     }
     progress.innerText = placeholderLetters.join("");
 };
-
-placeholder(word);
 
 guessButton.addEventListener("click", function (e) {
     e.preventDefault();
@@ -43,7 +53,7 @@ const validateInput = function (input) {
     if (input.length === 0) {
         messages.innerText = `Please type a letter.`;
     } else if (input.length > 1) {
-        messages.innerText = `Please enter 1 letter at a time.`;
+        messages.innerText = `Please enter ONE letter at a time.`;
     } else if (!input.match(acceptedLetter)) {
         messages.innerText = `Please enter a letter.`;
     } else {
@@ -101,7 +111,8 @@ const updateGuessesRemaining = function (guess) {
     }
 
     if (remainingGuesses === 0) {
-        messages.innerHTML = `You have no guesses remaining. The word was <span class="highlight">${word}</span>.`;
+        messages.innerHTML = `Game over. The word was <span class="highlight">${word}</span>.`;
+        remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
     } else if (remainingGuesses === 1) {
         remainingGuessesSpan.innerText = `${remainingGuesses} guess`;
     } else {
