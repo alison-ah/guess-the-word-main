@@ -107,7 +107,7 @@ const updateGuessesRemaining = function (guess) {
         messages.innerText = `The word does not include ${guess}. Please try again.`;
         remainingGuesses -= 1;
     } else {
-        messages.innerText = `Good guess! The word include the letter ${guess}.`;
+        messages.innerText = `Good guess! The word includes the letter ${guess}.`;
     }
 
     if (remainingGuesses === 0) {
